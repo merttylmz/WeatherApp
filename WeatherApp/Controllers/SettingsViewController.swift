@@ -6,24 +6,32 @@
 //
 
 import UIKit
+import SnapKit
 
 class SettingsViewController: UIViewController {
 
+    private let primaryView: SettingsView = {
+        let view = SettingsView()
+        let viewModel = SettingsViewModel(option: SettingsOption.allCases)
+        view.configure(with: viewModel)
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUpView()
+        
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUpView(){
+        view.backgroundColor = .systemBackground
+        view.addSubview(primaryView)
+        primaryView.snp.makeConstraints { make in
+            make.top.right.left.bottom.equalToSuperview()
+        }
     }
-    */
+
 
 }
